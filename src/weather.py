@@ -65,16 +65,22 @@ GPIO.add_event_detect(SPEED_PIN, GPIO.RISING, callback=speed_switch)
 
 def gui(scr):
     scr.clear()
-    deque = collections.deque([0] * plot_width, maxlen=plot_width)
+    deque_dir = collections.deque([0] * plot_width, maxlen=plot_width)
+    deque_speed = collections.deque([0] * plot_width, maxlen=plot_width)
 
     while(True):
     	value = tmp.value * 5.0
         direction = map_direction(value)
-        deque.popleft()
-        deque.append(value)
-        scr.addstr(0, 0, plot(deque, {'minimum': 0.0, 'maximum': 5.0}))
+        deque_dir.popleft()
+        deque_speed.popleft()
+        deque_dir.append(direction)
+        deque_speed.append(speed)
+        scr.addstr(0,0, 'DIRECTION')
+        scr.addstr(2, 0, plot(deque_dir, {'minimum': 0.0, 'maximum': 360.0, 'height': 16 }))
+        scr.addstr(20, 0, 'SPEED')
+        scr.addstr(22, 0, plot(deque_speed, {'minimum': 0.0, 'maximum': 20, 'height': 20 }))
         scr.refresh()
-        publish.single(MQTT_PATH, build_json_package(direction), hostname=MQTT_SERVER)
+        publish.single(MQTT_PATH, build_json_package(direction, speed), hostname=MQTT_SERVER)
         sleep(SEND_SLEEP)
 
 def headless():
@@ -90,7 +96,7 @@ def map_direction(direction_voltage):
             return DIRECTIONS.get(voltage)
     return DIRECTION_ERROR
 
-def build_json_package(direction):
+def build_json_package(direction, speed):
     return json.dumps({'speed': speed, 'direction': direction, 'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')})
 
 if __name__ == '__main__':
