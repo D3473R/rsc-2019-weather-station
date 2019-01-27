@@ -87,7 +87,7 @@ def headless():
     while(True):
     	value = tmp.value * 5.0
         direction = map_direction(value)
-        publish.single(MQTT_PATH, build_json_package(direction), hostname=MQTT_SERVER)
+        publish.single(MQTT_PATH, build_json_package(direction, speed), hostname=MQTT_SERVER)
         sleep(SEND_SLEEP)
 
 def map_direction(direction_voltage):
