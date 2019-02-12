@@ -9,7 +9,6 @@ import curses
 import random
 import locale
 import threading
-import itertools
 import collections
 import RPi.GPIO as GPIO
 import paho.mqtt.publish as publish
