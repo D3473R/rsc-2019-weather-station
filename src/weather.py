@@ -8,6 +8,8 @@ import json
 import curses
 import random
 import locale
+import threading
+import itertools
 import collections
 import RPi.GPIO as GPIO
 import paho.mqtt.publish as publish
@@ -50,26 +52,36 @@ columns = int(columns)
 plot_width = int(columns * 0.8)
 tmp = MCP3008(channel=0, device=0)
 
-last_speed_timestamp = datetime.now()
 speed = 0.0
+speed_counter = 0
+speed_lock = threading.Lock()
 
 def speed_switch(channel):
+    global speed_counter
+
+    with speed_lock:
+        speed_counter += 1
+
+def speed_timer():
     global speed
-    global last_speed_timestamp
-    now = datetime.now()
-    seconds_since_timestamp = (now - last_speed_timestamp).total_seconds()
-    speed = SPEED_MS * (1 / seconds_since_timestamp)
-    last_speed_timestamp = now
+    global speed_counter
+
+    while True:
+        with speed_lock:
+            speed = round(SPEED_MS * speed_counter, 2)
+            speed_counter = 0
+        sleep(1)
 
 GPIO.add_event_detect(SPEED_PIN, GPIO.RISING, callback=speed_switch)
 
 def gui(scr):
+
     scr.clear()
     deque_dir = collections.deque([0] * plot_width, maxlen=plot_width)
     deque_speed = collections.deque([0] * plot_width, maxlen=plot_width)
 
     while(True):
-    	value = tmp.value * 5.0
+        value = tmp.value * 5.0
         direction = map_direction(value)
         deque_dir.popleft()
         deque_speed.popleft()
@@ -85,7 +97,7 @@ def gui(scr):
 
 def headless():
     while(True):
-    	value = tmp.value * 5.0
+        value = tmp.value * 5.0
         direction = map_direction(value)
         publish.single(MQTT_PATH, build_json_package(direction, speed), hostname=MQTT_SERVER)
         sleep(SEND_SLEEP)
@@ -101,6 +113,8 @@ def build_json_package(direction, speed):
 
 if __name__ == '__main__':
     try:
+        t1 = threading.Thread(target=speed_timer)
+        t1.start()
         if ENABLE_GUI:
             curses.wrapper(gui)
         else:
