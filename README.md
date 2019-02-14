@@ -1,12 +1,14 @@
 # rsc-2019-weather-station
 
+A Weather Station implementation for the 1st Undergraduate Robotic Sailing Challenge 2019
+
 ## Table of contents
 
 * [Components](#components)
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Running](#running)
-* [Configuration](#configuration)
+* [Usage](#usage)
 * [Data](#data)
 * [Demo](#demo)
 
@@ -62,9 +64,33 @@ Simply connect to the ip of the raspberry and subscribe to the channel `weather`
 
 To receive the data in python you can also use [paho-mqtt](https://pypi.org/project/paho-mqtt/)
 
-## Configuration
+## Usage
 
-You can disable the visualisation of the data if you set `ENABLE_GUI = False` in `weather.py`
+```sh
+usage: weather.py [-h] [--server MQTT_SERVER] [--path MQTT_PATH]
+                  [--speed SPEED_PIN] [--dir-error DIRECTION_ERROR]
+                  [--dir-prec DIRECTION_PRECISION] [--send-sleep SEND_SLEEP]
+                  [--chart]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --server MQTT_SERVER, -s MQTT_SERVER
+                        the ip of the mqtt server (default: localhost)
+  --path MQTT_PATH, -p MQTT_PATH
+                        the path of mqtt packets (default: weather)
+  --speed SPEED_PIN     the gpio pin which is connected to the wind speed
+                        sensor (default: 25)
+  --dir-error DIRECTION_ERROR
+                        the direction value that will be written if an invalid
+                        direction was read (default: 359)
+  --dir-prec DIRECTION_PRECISION
+                        the precision in Volts of the mapped direction values
+                        (default: 0.015)
+  --send-sleep SEND_SLEEP
+                        the time in seconds between two mqtt packets (default:
+                        0.2)
+  --chart, -c           enable asciichartpy (default: False)
+```
 
 ## Data
 
