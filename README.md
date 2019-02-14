@@ -1,5 +1,15 @@
 # rsc-2019-weather-station
 
+## Table of contents
+
+* [Components](#components)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Running](#running)
+* [Configuration](#configuration)
+* [Data](#data)
+* [Demo](#demo)
+
 ## Components
 
 ### Weather station
@@ -28,28 +38,28 @@ You will need 2 M3 screws with min. 15mm length and two nuts
 
 ### [pip](https://pypi.org/project/pip/)
 
-- `sudo apt-get install python-pip`
+* `sudo apt-get install python-pip`
 
 ### [pipenv](https://github.com/pypa/pipenv)
 
-- `pip install --user pipenv`
-- Add pipenv to your path `echo -e '\nexport PATH="$PATH:~/.local/bin"' >> ~/.bashrc`
-- Activate `source ~/.bashrc`
+* `pip install --user pipenv`
+* Add pipenv to your path `echo -e '\nexport PATH="$PATH:~/.local/bin"' >> ~/.bashrc`
+* Activate `source ~/.bashrc`
 
 ### [mosquitto](https://mosquitto.org/)
 
-- Install mosquitto with `sudo apt-get install -y mosquitto mosquitto-clients`
+* Install mosquitto with `sudo apt-get install -y mosquitto mosquitto-clients`
 
 ## Installation
 
-- Clone the repository with `git clone https://github.com/D3473R/rsc-2019-weather-station.git`
-- Navigate in the cloned directory with `cd rsc-2019-weather-station`
-- Install the python dependencies with `pipenv install`
+* Clone the repository with `git clone https://github.com/D3473R/rsc-2019-weather-station.git`
+* Navigate in the cloned directory with `cd rsc-2019-weather-station`
+* Install the python dependencies with `pipenv install`
 
-## Run
+## Running
 
-- Start a pipenv shell with `pipenv shell`
-- Run `weather.py` with `python src/weather.py`
+* Start a pipenv shell with `pipenv shell`
+* Run `weather.py` with `python src/weather.py`
 
 To receive the data on another machine you can use any MQTT Client, e.g. [mqttfx](https://mqttfx.jensd.de/).
 
