@@ -36,15 +36,10 @@ You will need 2 M3 screws with min. 15mm length and two nuts
 
 ## Requirements
 
-### [pip](https://pypi.org/project/pip/)
-
-* `sudo apt-get install python-pip`
-
 ### [pipenv](https://github.com/pypa/pipenv)
 
-* `pip install --user pipenv`
-* Add pipenv to your path `echo -e '\nexport PATH="$PATH:~/.local/bin"' >> ~/.bashrc`
-* Activate `source ~/.bashrc`
+* Remove pip from apt as it may collide with pip installed from pipenv `sudo apt remove python-pip`
+* Install pipenv `curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | sudo python`
 
 ### [mosquitto](https://mosquitto.org/)
 
