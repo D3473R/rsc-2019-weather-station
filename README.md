@@ -74,4 +74,4 @@ A json paket consists of the timestamp the paket was sent, the wind direction in
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/223777.svg)](https://asciinema.org/a/223777)
+[![asciicast](https://asciinema.org/a/227526.svg)](https://asciinema.org/a/227526)
