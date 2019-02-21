@@ -9,6 +9,7 @@ A Weather Station implementation for the 1st Undergraduate Robotic Sailing Chall
 * [Installation](#installation)
 * [Running](#running)
 * [Usage](#usage)
+* [Autostart](#autostart)
 * [Data](#data)
 * [Demo](#demo)
 
@@ -92,9 +93,47 @@ optional arguments:
   --chart, -c           enable asciichartpy (default: False)
 ```
 
+## Autostart
+
+Autostart of the weather station can be accomplished via systemd.
+
+Create a service file:
+
+`sudo nano /etc/systemd/system/weather-station.service`
+
+And enter the followings
+
+```sh
+Unit]
+Description=Weather Station Service
+After=network.target
+
+[Service]
+User=pi
+Restart=always
+Type=simple
+WorkingDirectory=/home/pi/rsc-2019-weather-station/
+ExecStart=/usr/local/bin/pipenv run python /home/pi/rsc-2019-weather-station/src/weather.py
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload the systemd daemon with :
+
+`sudo systemctl daemon-reload`
+
+Start the service with:
+
+`sudo systemctl start weather-station`
+
+If you want the weather station to start on boot enter:
+
+`sudo systemctl enable weather-station`
+
 ## Data
 
-A json paket consists of the timestamp the paket was sent, the wind direction in degrees (in 16 steps) and the wind speed in m/s.
+A JSON packet consists of the timestamp the packet was sent, the wind direction in degrees (in 16 steps) and the wind speed in m/s.
 
 `{"timestamp": "2019-02-13T15:01:13Z", "direction": 67.5, "speed": 4.32}`
 
