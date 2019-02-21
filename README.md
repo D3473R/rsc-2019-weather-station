@@ -101,7 +101,7 @@ Create a service file:
 
 `sudo nano /etc/systemd/system/weather-station.service`
 
-And enter the followings
+And enter the following:
 
 ```sh
 Unit]
@@ -119,7 +119,7 @@ ExecStart=/usr/local/bin/pipenv run python /home/pi/rsc-2019-weather-station/src
 WantedBy=multi-user.target
 ```
 
-Reload the systemd daemon with :
+Reload the systemd daemon with:
 
 `sudo systemctl daemon-reload`
 
