@@ -39,14 +39,21 @@ You will need 2 M3 screws with min. 15mm length and two nuts
 
 ## Requirements
 
+### Update packages
+* `sudo apt update`
+* `sudo apt install python3-dev`
+
 ### [pipenv](https://github.com/pypa/pipenv)
 
 * Remove pip from apt as it may collide with pip installed from pipenv `sudo apt remove python-pip`
 * Install pipenv `curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | sudo python`
 
+### [git](https://git-scm.com/)
+* Install git with `sudo apt install git-core`
+
 ### [mosquitto](https://mosquitto.org/)
 
-* Install mosquitto with `sudo apt-get install -y mosquitto mosquitto-clients`
+* Install mosquitto with `sudo apt-get install -y mosquitto`
 
 ## Installation
 
