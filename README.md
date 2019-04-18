@@ -25,7 +25,7 @@ A Weather Station implementation for the 1st Undergraduate Robotic Sailing Chall
 
 The Gerber files are in the `pcb` directory
 
-![](images\BDE5caf50234bdf2_04.jpg)
+![](images/BDE5caf50234bdf2_04.jpg)
 
 The pcb design is here: https://easyeda.com/D3473R/weather-station
 
