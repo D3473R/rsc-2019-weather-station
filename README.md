@@ -21,6 +21,14 @@ A Weather Station implementation for the 1st Undergraduate Robotic Sailing Chall
 
 [Data sheet](https://www.sparkfun.com/datasheets/Sensors/Weather/Weather%20Sensor%20Assembly..pdf)
 
+#### PCB
+
+The Gerber files are in the `pcb` directory
+
+![](images\BDE5caf50234bdf2_04.jpg)
+
+The pcb design is here: https://easyeda.com/D3473R/weather-station
+
 ### Wifi Adapter
 
 [Alfa Network AWUS036NHA](https://www.amazon.de/dp/B01D064VMS/ref=cm_sw_r_cp_apa_i_2wD4Bb07P9566)
